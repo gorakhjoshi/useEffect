@@ -6,7 +6,6 @@ export function PokemonForm({
   onSubmit,
 }) {
   const [pokemonName, setPokemonName] = React.useState(initialPokemonName);
-  console.log(pokemonName);
 
   function handleChange(e) {
     setPokemonName(e.target.value);
@@ -64,5 +63,51 @@ export function PokemonForm({
         </button>
       </div>
     </form>
+  );
+}
+
+export function PokemonInfoFallback({ name }) {
+  // const initialName = React.useRef(name).current;
+  const fallbackPokemonData = {
+    name: name,
+    number: 'XXX',
+    image: '/img/fallback-pokemon.jpg',
+    attacks: {
+      special: [
+        { name: 'Loading Attack 1', type: 'Type', damage: 'XX' },
+        { name: 'Loading Attack 2', type: 'Type', damage: 'XX' },
+      ],
+    },
+    fetchedAt: 'loading...',
+  };
+  return <PokemonDataView pokemon={fallbackPokemonData} />;
+}
+
+export function PokemonDataView({ pokemon }) {
+  return (
+    <div>
+      <div className='pokemon-info__img-wrapper'>
+        <img src={pokemon.image} alt={pokemon.name} />
+      </div>
+      <section>
+        <h2>
+          {pokemon.name}
+          <sup>{pokemon.number}</sup>
+        </h2>
+      </section>
+      <section>
+        <ul>
+          {pokemon.attacks.special.map((attack) => (
+            <li key={attack.name}>
+              <label>{attack.name}</label>:{' '}
+              <span>
+                {attack.damage} <small>({attack.type})</small>
+              </span>
+            </li>
+          ))}
+        </ul>
+      </section>
+      <small className='pokemon-info__fetch-time'>{pokemon.fetchedAt}</small>
+    </div>
   );
 }

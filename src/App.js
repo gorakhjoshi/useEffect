@@ -1,10 +1,20 @@
 import React from 'react';
-import './App.css';
-import { PokemonForm } from './Pokemon';
+import { PokemonForm, PokemonInfoFallback, PokemonDataView } from './Pokemon';
+
+function PokemonInfo({ pokemonName }) {
+  console.log(pokemonName);
+  const pokemon = null;
+  if (!pokemonName) {
+    return 'Submit a Pokemon';
+  } else if (!pokemon) {
+    return <PokemonInfoFallback name={pokemonName} />;
+  } else {
+    return <PokemonDataView pokemon={pokemon} />;
+  }
+}
 
 const App = () => {
   const [pokemonName, setPokemonName] = React.useState('');
-  console.log(pokemonName);
 
   function handleSubmit(newPokemonName) {
     setPokemonName(newPokemonName);
@@ -13,6 +23,10 @@ const App = () => {
   return (
     <div className='pokemon-info-app'>
       <PokemonForm pokemonName={pokemonName} onSubmit={handleSubmit} />
+      <hr />
+      <div className='pokemon-info'>
+        <PokemonInfo pokemonName={pokemonName} />
+      </div>
     </div>
   );
 };
