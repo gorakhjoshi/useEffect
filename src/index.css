@@ -12,6 +12,16 @@ code {
     monospace;
 }
 
+.pokemon-info-app a {
+  color: #cc0000;
+}
+
+.pokemon-info-app a:focus,
+.pokemon-info-app a:hover,
+.pokemon-info-app a:active {
+  color: #8a0000;
+}
+
 .pokemon-info-app input {
   line-height: 2;
   font-size: 16px;
@@ -34,6 +44,12 @@ code {
   border-radius: 3px;
 }
 
+.pokemon-info-app button:disabled {
+  border-color: #dc9494;
+  background-color: #f16161;
+  cursor: unset;
+}
+
 .pokemon-info-app button:hover:not(:disabled),
 .pokemon-info-app button:active:not(:disabled),
 .pokemon-info-app button:focus:not(:disabled) {
@@ -41,9 +57,21 @@ code {
   background-color: #8a0000;
 }
 
+.pokemon-info-app .totally-centered {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .pokemon-info-app {
   max-width: 500px;
   margin: auto;
+}
+
+[class*='_isolated'] .pokemon-info-app {
+  margin-top: 50px;
 }
 
 .pokemon-form {
@@ -57,24 +85,6 @@ code {
   margin-right: 10px;
 }
 
-.pokemon-info-app button.invisible-button {
-  border: none;
-  padding: inherit;
-  font-size: inherit;
-  font-family: inherit;
-  cursor: pointer;
-  font-weight: inherit;
-  background-color: transparent;
-  color: #000;
-}
-
-.pokemon-info-app button.invisible-button:hover,
-.pokemon-info-app button.invisible-button:active,
-.pokemon-info-app button.invisible-button:focus {
-  border: none;
-  background-color: transparent;
-}
-
 .pokemon-info {
   height: 400px;
   width: 300px;
@@ -84,6 +94,13 @@ code {
   border-radius: 4px;
   padding: 10px;
   position: relative;
+}
+
+.pokemon-info.pokemon-loading {
+  opacity: 0.6;
+  transition: opacity 0s;
+  /* note: the transition delay is the same as the busyDelayMs config */
+  transition-delay: 0.4s;
 }
 
 .pokemon-info h2 {
@@ -106,4 +123,22 @@ code {
   position: absolute;
   top: 6px;
   right: 10px;
+}
+
+.pokemon-info-app button.invisible-button {
+  border: none;
+  padding: inherit;
+  font-size: inherit;
+  font-family: inherit;
+  cursor: pointer;
+  font-weight: inherit;
+  background-color: transparent;
+  color: #000;
+}
+
+.pokemon-info-app button.invisible-button:hover,
+.pokemon-info-app button.invisible-button:active,
+.pokemon-info-app button.invisible-button:focus {
+  border: none;
+  background-color: transparent;
 }

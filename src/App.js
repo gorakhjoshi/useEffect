@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import {
   PokemonForm,
   PokemonInfoFallback,
@@ -7,9 +7,18 @@ import {
 } from './Pokemon';
 
 function PokemonInfo({ pokemonName }) {
-  const pokemon = null;
+  const [pokemon, setPokemon] = React.useState(null);
+
+  React.useEffect(() => {
+    if (!pokemonName) {
+      return;
+    }
+    setPokemon(null);
+    fetchPokemon(pokemonName).then((pokemon) => setPokemon(pokemon));
+  }, [pokemonName]);
+
   if (!pokemonName) {
-    return 'Submit a Pokemon';
+    return 'Submit a pokemon';
   } else if (!pokemon) {
     return <PokemonInfoFallback name={pokemonName} />;
   } else {
@@ -17,10 +26,8 @@ function PokemonInfo({ pokemonName }) {
   }
 }
 
-const App = () => {
+function App() {
   const [pokemonName, setPokemonName] = React.useState('');
-
-  fetchPokemon(pokemonName);
 
   function handleSubmit(newPokemonName) {
     setPokemonName(newPokemonName);
@@ -35,6 +42,6 @@ const App = () => {
       </div>
     </div>
   );
-};
+}
 
 export default App;
